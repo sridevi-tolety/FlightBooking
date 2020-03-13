@@ -1,9 +1,9 @@
 package com.example.demo.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,9 +42,14 @@ public class BookingController {
 		return fservice.getFlights();		
 	}
 	
-	@GetMapping("/searchBookingHistory/{airlinesname}/{username}")
+	/*@GetMapping("/searchBookingHistory/{airlinesname}/{username}")
 	public List<Booking> getBookingHistory(@PathVariable String airlinesname , @PathVariable String username) {		
 		return bservice.getBookingHistory(airlinesname , username);
+	}*/
+	
+	@GetMapping("/searchBookingHistory/{username}")
+	public List<Booking> getBookingHistory(@PathVariable String username) {		
+		return bservice.getBookingHistory(username);
 	}
 	
 	@GetMapping("/searchBookingHistoryByDate/{fromdate}/{todate}/{username}")
@@ -53,7 +58,7 @@ public class BookingController {
 	}
 	
 	@PostMapping("/bookFlight")
-	public Booking getBookFlight(@RequestBody Booking booking) {
+	public Booking bookFlight(@RequestBody Booking booking) {
 		return bservice.bookFlight(booking);
 	}	
 	

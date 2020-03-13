@@ -25,7 +25,17 @@ INSERT INTO flight(source , destination, airlinesName, travelDate) VALUES   ('
 
 
 DROP TABLE IF EXISTS booking;
- 
+
+/*CREATE TABLE booking (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  username varchar(100),  
+  bookingdate datetime(3) NOT NULL,
+  flightid long not null  
+);
+INSERT INTO booking (username, bookingdate , flightid ) VALUES   ('s1', '2016-01-01 00:00:00',1);
+INSERT INTO booking (username, bookingdate , flightid ) VALUES   ('s2', '2016-01-10 00:00:00',2);
+ */
+
 CREATE TABLE booking (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   username varchar(100),
@@ -34,8 +44,8 @@ CREATE TABLE booking (
   bookingdate datetime(3) NOT NULL,
   traveldate datetime(3) NOT NULL,
   flightid long not null,
-  airlinesname varchar(100)	
-
+  airlinesname varchar(100),
+  CONSTRAINT `flight_fk_1` FOREIGN KEY (`flightid`) REFERENCES `flight` (`id`)
 );
 
 
@@ -43,7 +53,8 @@ INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,f
 INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s2','src1', 'dest1','2016-01-01 00:00:00' ,'2017-01-01 00:00:00',9, 'airline5');
 INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s1','src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline4');
 INSERT INTO booking (username, source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s2','src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline5');
- 
+
+
 DROP TABLE IF EXISTS passenger;
  
 CREATE TABLE passenger (

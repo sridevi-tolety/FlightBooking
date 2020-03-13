@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -20,9 +21,28 @@ public class Booking {
 	private String destination;
 	private Date bookingdate;
 	private Date traveldate;
-	private String flightid;
-	private String airlinesname;
+	private long flightid;
+	String airlinesname;
 	private String username;
+	
+	@Transient
+	private Flight flight;	
+	public Flight getFlight() {
+		return flight;
+	}
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+	
+	public String getAirlinesname() {
+		return airlinesname;
+	}
+	public long getFlightid() {
+		return flightid;
+	}
+	public void setFlightid(long flightid) {
+		this.flightid = flightid;
+	}
 	
 	@OneToMany
 	@Transient 
@@ -33,7 +53,8 @@ public class Booking {
 	}
 	public void setPassengers(Set<Passenger> passengers) {
 		this.passengers = passengers;
-	}
+	}	
+	
 	public String getUsername() {
 		return username;
 	}
@@ -59,13 +80,7 @@ public class Booking {
 		this.destination = destination;
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", source=" + source + ", destination=" + destination + ", bookingDate="
-				+ bookingdate + ", travelDate=" + traveldate + ", flightId=" + flightid + "]";
-	}
-	public Booking(long id, String source, String destination, Date bookingDate, Date travelDate, String flightId) {
+	public Booking(long id, String source, String destination, Date bookingDate, Date travelDate, long flightId) {
 		super();
 		this.id = id;
 		this.source = source;
@@ -82,13 +97,13 @@ public class Booking {
 	public void setBookingdate(Date bookingdate) {
 		this.bookingdate = bookingdate;
 	}
-	public Date getTraveldate() {
+	 Date getTraveldate() {
 		return traveldate;
 	}
 	public void setTraveldate(Date traveldate) {
 		this.traveldate = traveldate;
 	}
-	public String getFlightid() {
+	/* String getFlightid() {
 		return flightid;
 	}
 	public void setFlightid(String flightid) {
@@ -96,8 +111,23 @@ public class Booking {
 	}
 	public String getAirlinesname() {
 		return airlinesname;
-	}
+	}*/
 	public void setAirlinesname(String airlinesname) {
 		this.airlinesname = airlinesname;
+	}
+	
+	@Override
+	public String toString() {
+		return "Booking [id=" + id + ", bookingdate=" + bookingdate +  ", username="
+				+ username + ", flightid=" + flightid + ", passengers=" + passengers + "]";
+	}
+	public Booking(long id, Date bookingdate, String airlinesname, String username, long flightid,
+			Set<Passenger> passengers) {
+		super();
+		this.id = id;
+		this.bookingdate = bookingdate;		
+		this.username = username;
+		this.flightid = flightid;
+		this.passengers = passengers;
 	}
 }

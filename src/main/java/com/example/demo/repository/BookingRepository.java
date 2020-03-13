@@ -17,5 +17,8 @@ public interface BookingRepository extends JpaRepository<Booking , Long>{
 	
 	@Query(value = "select * from booking where traveldate between ?1 and ?2 and username = ?3" , nativeQuery=true)
 	List<Booking> findByDateRange(String fromdate, String todate, String username);
+	
+	@Query(value = "select * from booking where username = ?1" , nativeQuery=true)
+	List<Booking> findByUsername(String username);
 
 }
