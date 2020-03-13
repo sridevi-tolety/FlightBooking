@@ -13,5 +13,8 @@ public interface FlightRepository extends JpaRepository<Flight , Long>{
 	
 	@Query(value = "select * from flight where source = ?1 and destination = ?2" , nativeQuery=true)
 	List<Flight> findBySource(String source , String destination);
+	
+	@Query(value = "select * from flight where source = ?1 and destination = ?2 and traveldate = ?3" , nativeQuery=true)
+	List<Flight> findFlights(String source, String destination, String traveldate);
 
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Passenger {
@@ -13,12 +15,16 @@ public class Passenger {
 	@GeneratedValue
 	private long id;
 	
-	private String name;
-	private String age;
-	private Date dob;
+	private String name;	
+	private Date dob;	
+	private long bookingid;		
 	
-	private long bookingId;
-	
+	public long getBookingid() {
+		return bookingid;
+	}
+	public void setBookingid(long bookingid) {
+		this.bookingid = bookingid;
+	}
 	public long getId() {
 		return id;
 	}
@@ -31,27 +37,25 @@ public class Passenger {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAge() {
-		return age;
-	}
-	public void setAge(String age) {
-		this.age = age;
-	}
+	
 	public Date getDob() {
 		return dob;
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	@Override
-	public String toString() {
-		return "Passenger [id=" + id + ", name=" + name + ", age=" + age + ", dob=" + dob + "]";
-	}
-	public Passenger(long id, String name, String age, Date dob) {
+	public Passenger(long id, String name, String age, Date dob, long bookingid) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.age = age;
+		this.name = name;		
 		this.dob = dob;
-	}	
+		this.bookingid = bookingid;
+	}
+	public Passenger() {}
+	@Override
+	public String toString() {
+		return "Passenger [id=" + id + ", name=" + name + ", dob=" + dob + ", bookingid=" + bookingid
+				+ "]";
+	}
+		
 }
