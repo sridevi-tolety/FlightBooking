@@ -25,4 +25,9 @@ public class FlightService {
 		System.out.println("Size : "+fs.size());
 		return fs;
 	}
+
+	public List<Flight> getSearchedFlights(String source, String destination, String traveldate) {
+		// TODO Auto-generated method stub
+		return frepo.findFlights(source , destination , traveldate);
+	}
 }
