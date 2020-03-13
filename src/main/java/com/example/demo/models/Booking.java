@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Booking {
@@ -20,8 +22,24 @@ public class Booking {
 	private Date traveldate;
 	private String flightid;
 	private String airlinesname;
+	private String username;
 	
+	@OneToMany
+	@Transient 
+	private Set<Passenger> passengers; 
 	
+	public Set<Passenger> getPassengers() {
+		return passengers;
+	}
+	public void setPassengers(Set<Passenger> passengers) {
+		this.passengers = passengers;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public long getId() {
 		return id;
 	}
