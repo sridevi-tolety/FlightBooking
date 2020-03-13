@@ -1,10 +1,13 @@
 package com.example.demo.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,15 +32,30 @@ public class BookingController {
 		return fservice.getSearchedFlights(source, destination);		
 	}
 	
+	@GetMapping("/searchFlightsByDate/{source}/{destination}/{traveldate}")
+	public List<Flight> searchedFlights(@PathVariable String source, @PathVariable String destination ,@PathVariable String traveldate){
+		return fservice.getSearchedFlights(source, destination, traveldate);		
+	}
+	
 	@GetMapping("/searchFlights")
 	public List<Flight> getFlights(){
 		return fservice.getFlights();		
 	}
 	
-	@GetMapping("/searchBookingHistory/{airlinesname}")
-	public List<Booking> getBookingHistory(@PathVariable String airlinesname) {		
-		return bservice.getBookingHistory(airlinesname);
+	@GetMapping("/searchBookingHistory/{airlinesname}/{username}")
+	public List<Booking> getBookingHistory(@PathVariable String airlinesname , @PathVariable String username) {		
+		return bservice.getBookingHistory(airlinesname , username);
 	}
+	
+	@GetMapping("/searchBookingHistoryByDate/{fromdate}/{todate}/{username}")
+	public List<Booking> getBookingHistoryByDate(@PathVariable String fromdate , @PathVariable String todate ,@PathVariable String username) {		
+		return bservice.getBookingHistoryByDate(fromdate, todate, username);
+	}
+	
+	@PostMapping("/bookFlight")
+	public Booking getBookFlight(@RequestBody Booking booking) {
+		return bservice.bookFlight(booking);
+	}	
 	
 	@GetMapping("/hi")
 	public String sayHi(){
