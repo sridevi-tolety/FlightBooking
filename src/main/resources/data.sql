@@ -28,6 +28,7 @@ DROP TABLE IF EXISTS booking;
  
 CREATE TABLE booking (
   id INT AUTO_INCREMENT  PRIMARY KEY,
+  username varchar(100),
   source varchar(100) not null,
   destination varchar(100) not null,
   bookingdate datetime(3) NOT NULL,
@@ -38,16 +39,21 @@ CREATE TABLE booking (
 );
 
 
-INSERT INTO booking (source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('src1', 'dest1', '2016-01-01 00:00:00', '2017-01-01 00:00:00' ,1,'airline1');
-INSERT INTO booking (source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('src1', 'dest1','2016-01-01 00:00:00' ,'2017-01-01 00:00:00',9, 'airline5');
-INSERT INTO booking (source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline4');
-INSERT INTO booking (source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline5');
+INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s1','src1', 'dest1', '2016-01-01 00:00:00', '2017-01-01 00:00:00' ,1,'airline1');
+INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s2','src1', 'dest1','2016-01-01 00:00:00' ,'2017-01-01 00:00:00',9, 'airline5');
+INSERT INTO booking (username ,source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s1','src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline4');
+INSERT INTO booking (username, source , destination, bookingdate , traveldate ,flightid , airlinesname) VALUES   ('s2','src4', 'dest4','2016-01-01 00:00:00' ,'2017-01-02 00:00:00', 4,'airline5');
  
 DROP TABLE IF EXISTS passenger;
  
 CREATE TABLE passenger (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   name varchar(250) not null,  
-  dob timestamp NOT NULL,
-  bookingId long not null 
+  dob datetime(3) NOT NULL,
+  bookingid long not null ,
+  CONSTRAINT `pass_fk_1` FOREIGN KEY (`bookingid`) REFERENCES `booking` (`id`)
 );
+
+insert into passenger (name , dob , bookingid) values('pass1' , '2000-10-01 00:00:00' ,1);
+insert into passenger (name , dob , bookingid) values('pass2' , '2006-01-21 00:00:00' ,1);
+
